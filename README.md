@@ -12,6 +12,16 @@ A full-stack banking app where **AI helps, but never decides alone**.
 
 > This is a portfolio project with a **fictional bank**. Use only the SAMPLE cards in `samples/`, never real ID documents.
 
+## Screenshots
+
+| Dashboard | AI assistant (payment needs your confirmation) |
+|---|---|
+| ![Dashboard](docs/screenshots/dashboard.png) | ![AI assistant](docs/screenshots/assistant.png) |
+| **KYC: Gemini reads the PAN card, code checks it** | **Admin: rules flag, AI explains, a person decides** |
+| ![KYC](docs/screenshots/kyc.png) | ![Admin](docs/screenshots/admin.png) |
+
+![Monthly insights](docs/screenshots/insights.png)
+
 ## Tech stack
 
 | Layer | Tools |
