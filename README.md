@@ -118,5 +118,4 @@ server/
   tests/                   unit + real-database tests
 client/src/pages/          Dashboard, KYC, Send Money, Transactions, Assistant, Insights, Admin
 samples/                   SAMPLE cards for the KYC demo
-INTERVIEW.md               how to explain every part in an interview
 ```

@@ -7,6 +7,7 @@ import { ruleCategory } from '../src/services/categorize.js';
 import { checkKyc, hashPan } from '../src/services/kyc.js';
 import { checkFraud, templateExplanation } from '../src/services/fraud.js';
 import { maskPan } from '../src/utils/mask.js';
+import { pathToFileURL } from 'node:url';
 
 // Demo logins (also listed in README.md). These are test values for this demo app only.
 const DEMO_PASSWORD = 'Demo@1234';
@@ -67,7 +68,7 @@ function monthlyLife(rand, { salaryRupees, rentRupees, employer }) {
   return events;
 }
 
-async function seed() {
+export async function seedDemoData() {
   await applySchema();
 
   await transaction(async (client) => {
@@ -198,6 +199,9 @@ async function seed() {
   });
 }
 
-await seed();
-await closeDb();
-console.log('Done. Demo logins are listed in README.md.');
+// Run directly (npm run db:seed)? Seed now. Imported by the server? Just export the function.
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  await seedDemoData();
+  await closeDb();
+  console.log('Done. Demo logins are listed in README.md.');
+}

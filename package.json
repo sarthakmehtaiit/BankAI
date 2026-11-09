@@ -4,7 +4,7 @@
   "private": true,
   "description": "BankAI: a GenAI banking app with KYC, safe transfers, fraud alerts and an AI assistant",
   "scripts": {
-    "build": "npm --prefix client ci && npm --prefix client run build && npm --prefix server ci",
+    "build": "npm --prefix client ci --include=dev && npm --prefix client run build && npm --prefix server ci --omit=dev",
     "start": "npm --prefix server start",
     "test": "npm --prefix server test"
   }

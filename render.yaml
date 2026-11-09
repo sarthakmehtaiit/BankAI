@@ -1,0 +1,40 @@
+# Render Blueprint: creates the database and the web app in one go.
+# Render dashboard -> New -> Blueprint -> pick this repo -> paste GEMINI_API_KEY -> Apply.
+
+databases:
+  - name: bankai-db
+    plan: free
+    databaseName: bankai
+    user: bankai
+
+services:
+  - type: web
+    name: bankai
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bankai-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PAN_HASH_SECRET
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false # you paste this in the Render dashboard; it is never stored in the repo
+      - key: GEMINI_MODEL
+        value: gemini-3.5-flash
+      - key: GEMINI_FALLBACK_MODEL
+        value: gemini-3.1-flash-lite
+      - key: GEMINI_THINKING
+        value: minimal
+      - key: SEED_DEMO_DATA
+        value: "true" # loads demo users and transactions on the first start
