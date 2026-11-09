@@ -1,5 +1,7 @@
 # BankAI: a GenAI banking app
 
+**Live demo:** https://bankai-xq5i.onrender.com (login: `aarav@bankai.dev` / `Demo@1234`; first load can take ~1 minute while the free server wakes up)
+
 A full-stack banking app where **AI helps, but never decides alone**.
 
 - **KYC with AI**: Gemini reads a PAN card photo, our code checks the details, and an admin reviews unclear cases.
