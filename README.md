@@ -8,7 +8,7 @@ A full-stack banking app where **AI helps, but never decides alone**.
 - **Auto-categories**: keyword rules first, Gemini only for unknown merchants, and answers are cached.
 - **Fraud alerts**: simple rules hold risky payments, Gemini writes the explanation, and an admin approves or rejects.
 - **Monthly insights**: SQL calculates the numbers, and Gemini writes the tips.
-- **CI/CD**: GitHub Actions runs unit and real-database tests, and Render deploys only if they pass.
+- **CI**: GitHub Actions runs the unit and real-database tests on every push.
 
 > This is a portfolio project with a **fictional bank**. Use only the SAMPLE cards in `samples/`, never real ID documents.
 
@@ -21,7 +21,7 @@ A full-stack banking app where **AI helps, but never decides alone**.
 | Database | PostgreSQL (plain SQL with the `pg` driver) |
 | AI | Google Gemini REST API: function calling, JSON output, image reading |
 | Testing | Node's built-in test runner (`node --test`) |
-| CI/CD | GitHub Actions + Render |
+| CI/CD | GitHub Actions |
 
 ## Architecture
 
@@ -92,20 +92,6 @@ npm test
   - every balance equals money in minus money out
 
 GitHub Actions starts a throwaway Postgres and runs both sets on every push.
-
-## Deploy (Render + GitHub Actions)
-
-1. Push the repo to GitHub.
-2. Create a free PostgreSQL database (Render, Supabase or Neon).
-3. On Render, create a **Web Service** from the repo:
-   - Build command: `npm run build`
-   - Start command: `npm start`
-   - Environment: `NODE_ENV=production`, `DATABASE_URL`, `DATABASE_SSL=true`, `JWT_SECRET`, `PAN_HASH_SECRET`, `GEMINI_API_KEY`
-   - Turn **Auto-Deploy off**. GitHub Actions decides when to deploy.
-4. Copy the service's **Deploy Hook URL** and add it to GitHub as the secret `RENDER_DEPLOY_HOOK_URL`.
-5. Run the seed once from the Render shell: `cd server && npm run db:seed`.
-
-Now every push to `main` runs the tests, and Render deploys only if they all pass.
 
 ## Project structure
 
